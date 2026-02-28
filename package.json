@@ -1,6 +1,6 @@
 {
   "name": "usepopcorn",
-  "homapage": "https://w-gaafer.github.io/popcorn/",
+  "homepage": "https://w-gaafer.github.io/popcorn",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
