@@ -229,7 +229,7 @@ function Movie({ movie, handleSelectMovie }) {
 function WatchedSummery({ watched }) {
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
-  const totalRuntime = watched.reduce((acc, movie) => {
+  const totalRuntime = (watched || []).reduce((acc, movie) => {
     const runtime = parseInt(movie.runTime);
     if (!isNaN(runtime)) {
       return acc + runtime;
