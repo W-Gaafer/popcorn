@@ -407,7 +407,7 @@ function MovieDetails({
 function WatchedMovieList({ watched, handleDeleteWatched }) {
   return (
     <ul className="list">
-      {watched.map((movie) => (
+      {(watched || []).map((movie) => (
         <WatchedMovie
           movie={movie}
           key={movie.imdbID}
