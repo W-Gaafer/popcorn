@@ -226,14 +226,14 @@ function Movie({ movie, handleSelectMovie }) {
 }
 
 function WatchedSummery({ watched }) {
-  const avgRating = average(watched.map((m) => m.vote_average));
-  const avgUser = average(watched.map((m) => m.userRating));
-  const totalRuntime = watched.reduce((acc, m) => acc + m.runtime, 0);
+  const avgRating = average((watched ?? []).map((m) => m.vote_average));
+  const avgUser = average((watched ?? []).map((m) => m.userRating));
+  const totalRuntime = (watched ?? []).reduce((acc, m) => acc + m.runtime, 0);
 
   return (
     <div className="summary">
       <h2>Movies you watched</h2>
-      <p>{watched.length} movies</p>
+      <p>{(watched ?? []).length} movies</p>
       <p>⭐ {avgRating.toFixed(1)}</p>
       <p>🌟 {avgUser.toFixed(1)}</p>
       <p>⏳ {totalRuntime} min</p>
@@ -303,7 +303,7 @@ function MovieDetails({
 function WatchedMovieList({ watched, handleDeleteWatched }) {
   return (
     <ul className="list">
-      {watched.map((movie) => (
+      {(watched ?? []).map((movie) => (
         <li key={movie.id}>
           <img src={movie.poster} alt={movie.title} />
           <h3>{movie.title}</h3>
