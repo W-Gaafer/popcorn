@@ -233,10 +233,24 @@ function WatchedSummery({ watched }) {
   return (
     <div className="summary">
       <h2>Movies you watched</h2>
-      <p>{(watched ?? []).length} movies</p>
-      <p>⭐ {avgRating.toFixed(1)}</p>
-      <p>🌟 {avgUser.toFixed(1)}</p>
-      <p>⏳ {totalRuntime} min</p>
+      <div>
+        <p>
+          <span>#️⃣</span>
+          <span>{(watched ?? []).length} movies</span>
+        </p>
+        <p>
+          <span>⭐</span>
+          <span>{avgRating.toFixed(1)}</span>
+        </p>
+        <p>
+          <span>🌟</span>
+          <span>{avgUser.toFixed(1)}</span>
+        </p>
+        <p>
+          <span>⏳</span>
+          <span>{totalRuntime} min</span>
+        </p>
+      </div>
     </div>
   );
 }
@@ -258,6 +272,7 @@ function MovieDetails({
       const data = await res.json();
       setMovie(data);
     }
+
     fetchDetails();
   }, [selectedId]);
 
@@ -272,18 +287,21 @@ function MovieDetails({
       runtime: movie.runtime || 0,
       userRating,
     });
+
     handleCloseMovie();
   }
 
   return (
     <div className="details">
-      <button onClick={handleCloseMovie}>←</button>
       <img src={IMG_URL + movie.poster_path} alt={movie.title} />
+
       <h2>{movie.title}</h2>
-      <p>{movie.release_date}</p>
-      <p>{movie.runtime} min</p>
-      <p>⭐ {movie.vote_average}</p>
+
       <p>{movie.overview}</p>
+
+      <p>📅 {movie.release_date}</p>
+      <p>⏱ {movie.runtime} min</p>
+      <p>⭐ {movie.vote_average}</p>
 
       <StarRating
         maxRating={10}
@@ -296,52 +314,48 @@ function MovieDetails({
           + Add to list
         </button>
       )}
+
+      <button className="btn-back" onClick={handleCloseMovie}>
+        ← Back
+      </button>
     </div>
   );
 }
 
 function WatchedMovieList({ watched, handleDeleteWatched }) {
   return (
-    <ul className="list">
+    <ul className="list list-watched">
       {(watched ?? []).map((movie) => (
         <li key={movie.id}>
           <img src={movie.poster} alt={movie.title} />
-          <h3>{movie.title}</h3>
-          <p>⭐ {movie.vote_average}</p>
-          <p>🌟 {movie.userRating}</p>
-          <p>⏳ {movie.runtime} min</p>
-          <button onClick={() => handleDeleteWatched(movie.id)}>X</button>
+
+          <div className="movie-info">
+            <h3>{movie.title}</h3>
+
+            <p>
+              <span>⭐</span>
+              <span>{movie.vote_average}</span>
+            </p>
+
+            <p>
+              <span>🌟</span>
+              <span>{movie.userRating}</span>
+            </p>
+
+            <p>
+              <span>⏳</span>
+              <span>{movie.runtime} min</span>
+            </p>
+          </div>
+
+          <button
+            className="btn-delete"
+            onClick={() => handleDeleteWatched(movie.id)}
+          >
+            X
+          </button>
         </li>
       ))}
     </ul>
-  );
-}
-
-function WatchedMovie({ movie, handleDeleteWatched }) {
-  return (
-    <li key={movie.imdbID}>
-      <img src={movie.poster} alt={`${movie.title} poster`} />
-      <h3>{movie.title}</h3>
-      <div>
-        <p>
-          <span>⭐️</span>
-          <span>{movie.imdbRating}</span>
-        </p>
-        <p>
-          <span>🌟</span>
-          <span>{movie.userRating}</span>
-        </p>
-        <p>
-          <span>⏳</span>
-          <span>{movie.runTime} min</span>
-        </p>
-        <button
-          className="btn-delete"
-          onClick={() => handleDeleteWatched(movie.imdbID)}
-        >
-          X
-        </button>
-      </div>
-    </li>
   );
 }

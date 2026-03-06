@@ -131,14 +131,13 @@ body {
 .list li {
   position: relative;
   display: grid;
-  grid-template-columns: 4rem 1fr;
+  grid-template-columns: 8rem 1fr;
   grid-template-rows: auto auto;
-  column-gap: 2.4rem;
-  font-size: 1.6rem;
+  column-gap: 2rem;
   align-items: center;
-
   padding: 1.6rem 3.2rem;
   border-bottom: 1px solid var(--color-background-100);
+  font-size: 1.6rem;
 }
 
 .list.list-movies li {
@@ -152,17 +151,13 @@ body {
 
 .list img {
   width: 100%;
-  grid-row: 1 / -1;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .list h3 {
   font-size: 1.8rem;
-}
-
-.list div {
-  display: flex;
-  align-items: center;
-  gap: 2.4rem;
 }
 
 .list p {
@@ -171,10 +166,21 @@ body {
   gap: 0.8rem;
 }
 
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  justify-content: left;
+}
+
+.movie-info h3 {
+  font-size: 1.7rem;
+}
+
 .btn-delete {
   position: absolute;
+  top: 1rem;
   right: 1.5rem;
-
   height: 1.8rem;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -184,7 +190,6 @@ body {
   font-size: 0.8rem;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s;
 }
 
 .btn-delete:hover {
@@ -209,7 +214,7 @@ body {
 .summary div {
   display: flex;
   align-items: center;
-  gap: 2.4rem;
+  gap: 2rem;
   font-size: 1.6rem;
   font-weight: 600;
 }
@@ -223,12 +228,17 @@ body {
 /* ******* */
 
 .details {
-  line-height: 1.4;
+  line-height: 1.5;
   font-size: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 15px 30px;
 }
 
-.details header {
-  display: flex;
+.details-title {
+  font-size: 2.2rem;
+  font-weight: 600;
 }
 
 .details section {
@@ -238,8 +248,10 @@ body {
   gap: 1.6rem;
 }
 
-.details img {
-  width: 33%;
+.details-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 .details-overview {
@@ -301,25 +313,69 @@ body {
 }
 
 .btn-back {
-  position: absolute;
-  top: 0.6rem;
-  left: 0.6rem;
-  height: 3.2rem;
-  aspect-ratio: 1;
-  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: var(--color-text);
   border: none;
-  /* background-color: var(--color-text); */
-  background-color: #fff;
-  color: var(--color-background-500);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
-  font-family: sans-serif;
-  font-size: 2.4rem;
+  border-radius: 10rem;
+  font-size: 1.4rem;
+  padding: 1rem;
   font-weight: bold;
   cursor: pointer;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: all 0.3s;
+}
+
+/* ================= TABLET ================= */
+@media (min-width: 450px) and (max-width: 769px) {
+  body {
+    padding: 1.6rem;
+  }
+
+  html {
+    font-size: 55%;
+  }
+
+  .nav-bar {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 1.6rem;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .search {
+    width: 100%;
+  }
+
+  .main {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .box {
+    width: 100%;
+    max-width: 100%;
+    max-height: 230px;
+  }
+
+  .details img {
+    width: 50%;
+  }
+
+  .summary div {
+    flex-wrap: wrap;
+    gap: 1.6rem;
+  }
+
+  .list li {
+    padding: 5px 15px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main {
+    max-width: 1200px;
+    margin: 2.4rem auto;
+  }
 }
 
 /* ========================== MOBILE ========================== */
@@ -351,7 +407,7 @@ body {
   .box {
     width: 100%;
     max-width: 100%;
-    max-height: 320px;
+    max-height: 250px;
   }
 
   .details header {
@@ -359,7 +415,7 @@ body {
   }
 
   .details img {
-    width: 100%;
+    width: 50%;
   }
 
   .details-overview {
@@ -377,56 +433,3 @@ body {
     padding: 1.2rem;
   }
 }
-
-/* ================= TABLET ================= */
-@media (min-width: 450px) and (max-width: 769px) {
-  body {
-    padding: 1.6rem;
-  }
-
-  .nav-bar {
-    grid-template-columns: 1fr;
-    height: auto;
-    gap: 1.6rem;
-    padding: 2rem;
-    text-align: center;
-  }
-
-  .search {
-    width: 100%;
-  }
-
-  .main {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .box {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .details img {
-    width: 50%;
-  }
-
-  .summary div {
-    flex-wrap: wrap;
-    gap: 1.6rem;
-  }
-}
-
-@media (min-width: 1200px) {
-  .main {
-    max-width: 1200px;
-    margin: 2.4rem auto;
-  }
-}
-
-/*
-SPACING SYSTEM (px)
-2 / 4 / 8 / 12 / 16 / 24 / 32 / 40 / 48 / 64 / 80 / 96 / 128
-
-FONT SIZE SYSTEM (px)
-10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 /52 / 62 / 74 / 86 / 98
-*/
